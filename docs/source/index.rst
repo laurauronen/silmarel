@@ -1,5 +1,5 @@
 Welcome to silmarel's documentation!
-===================================
+====================================
 
 **silmarel** is a Python library for multi-messenger dark binary lensing.
 
