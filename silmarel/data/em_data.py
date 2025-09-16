@@ -21,3 +21,6 @@ class ImageData():
         
 class EMPosteriors():
 
+    def __init__(self):
+
+        return 

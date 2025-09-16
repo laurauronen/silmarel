@@ -22,7 +22,7 @@ from lenstronomy.Data.psf import PSF as lens_PSF
 
 # local imports 
 #from ..utils.herculens_gw import *
-from ..utils.lenstronomy_gw import lens_gw
+from ..utils.gw_lensing import *
 
 class ModelSim():
     """
@@ -45,10 +45,11 @@ class ModelSim():
     """
 
     def __init__(self,
-                 models: list[Any, Any, Any],
+                 models: list[Any],
                  kwargs_models : list[list],
                  kwargs_settings : list[dict],
                  gw_kwargs : Optional[dict] = None,
+                 H0 : float = 70, 
                  likeli: str = 'lenstronomy'):
 
         lensmass, sourcelight, lenslight = models
@@ -67,17 +68,19 @@ class ModelSim():
         self.psf = None
 
         if likeli == 'lenstronomy':
-            if gw_kwargs: 
-                self.gw_data = lens_gw(gw_kwargs['ra'],
-                                    gw_kwargs['dec'],
-                                    lensmodel = self.models.LensMass,
-                                    kwargs_lens = self.models.mass_kwargs)
+            if gw_kwargs:
+                self.gw_data = lens_gw(pointmodel=None,
+                                       pointkwargs=gw_kwargs,
+                                       massmodel=lensmass,
+                                       lenskwargs=kwargs_mass,
+                                       z_l=lensmass.z_lens,
+                                       z_s=lensmass.z_source,
+                                       H0 = H0)
 
-            self.pixelgrid = lens_PixelGrid(**self.settings.kwargs_pixel)
-            self.psf = lens_PSF(**self.settings.kwargs_psf)
+                self.pixelgrid = lens_PixelGrid(**self.settings.kwargs_pixel)
+                self.psf = lens_PSF(**self.settings.kwargs_psf)
 
-            self.image_data = self.lenstronomy_image()
-
+                self.image_data = self.lenstronomy_image()
 
         elif likeli == 'herculens':
 
@@ -120,8 +123,10 @@ class ModelSim():
         self.settings.kwargs_data['image_data'] = imageLens
         data_class = lens_ImageData(**self.settings.kwargs_data)
 
-        poisson = image_util.add_poisson(imageLens, exp_time=self.settings.kwargs_data['exposure_time'])
-        bkg = image_util.add_background(imageLens, sigma_bkd=self.settings.kwargs_data['background_rms'])
+        poisson = image_util.add_poisson(imageLens, 
+                                         exp_time=self.settings.kwargs_data['exposure_time'])
+        bkg = image_util.add_background(imageLens, 
+                                        sigma_bkd=self.settings.kwargs_data['background_rms'])
 
         image_real = imageLens + poisson + bkg
         data_class.update_data(image_real)
