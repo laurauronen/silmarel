@@ -2,16 +2,16 @@
 Handle GW data reading and processing.
 """
 
-from typing import Optional 
+from typing import Optional
 
-import bilby.core.result as bilby_result
-from pandas import DataFrame as DF 
-
-from astropy.cosmology import FlatLambdaCDM
 from scipy import stats 
 
-import matplotlib.pyplot as plt
-import numpy as np 
+from pandas import DataFrame as DF
+
+from astropy.cosmology import FlatLambdaCDM
+
+import bilby.core.result as bilby_result
+
 class GWData ():
     """
     Object to build KDEs of the GW posteriors provided.

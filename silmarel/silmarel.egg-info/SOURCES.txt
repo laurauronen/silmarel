@@ -1,0 +1,7 @@
+setup.py
+silmarel/__init__.py
+silmarel.egg-info/PKG-INFO
+silmarel.egg-info/SOURCES.txt
+silmarel.egg-info/dependency_links.txt
+silmarel.egg-info/not-zip-safe
+silmarel.egg-info/top_level.txt

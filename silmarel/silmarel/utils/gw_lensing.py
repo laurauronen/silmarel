@@ -6,12 +6,39 @@ from typing import Any, Optional
 import numpy as np
 import jax.numpy as jnp
 
-from lenstronomy.LensModel.Solver.lens_equation_solver import LensEquationSolver
 from astropy.cosmology import FlatLambdaCDM
 from astropy import units as u
 from astropy import constants
+
+from lenstronomy.LensModel.Solver.lens_equation_solver import LensEquationSolver
+
 from herculens.MassModel.mass_model import MassModel
 from herculens.PointSourceModel.point_source import PointSource
+
+def tdd (z_l: float,
+         z_s: float,
+         cosmo: Any) -> Any:
+    """
+    Obtain time delay distance constant for given parameters. 
+
+    ARGS
+    ====
+    z_lens      Lens redshift
+    z_source    Source redshift
+    H0          Hubble constant for chosen cosmology
+
+    RETURNS
+    =======
+                Time delay distance value.
+
+    """
+
+    DL = cosmo.angular_diameter_distance(z=z_l).to(u.m)
+    DS = cosmo.angular_diameter_distance(z=z_s).to(u.m)
+    DLS = cosmo.angular_diameter_distance_z1z2(z1=z_l, z2=z_s).to(u.m)
+    c = constants.c
+
+    return (1 + z_l) * (DL * DS / DLS / c).to(u.d)
 
 def lens_gw(pointmodel: Optional[Any],
             pointkwargs: list[dict],
@@ -125,28 +152,3 @@ def lens_gw(pointmodel: Optional[Any],
     gw_dictionary['luminosity_distance'] = eff_luminosity_distance.value
 
     return gw_dictionary
-
-def tdd (z_l: float,
-         z_s: float,
-         cosmo: Any) -> Any:
-    """
-    Obtain time delay distance constant for given parameters. 
-
-    ARGS
-    ====
-    z_lens      Lens redshift
-    z_source    Source redshift
-    H0          Hubble constant for chosen cosmology
-
-    RETURNS
-    =======
-                Time delay distance value.
-
-    """
-
-    DL = cosmo.angular_diameter_distance(z=z_l).to(u.m)
-    DS = cosmo.angular_diameter_distance(z=z_s).to(u.m)
-    DLS = cosmo.angular_diameter_distance_z1z2(z1=z_l, z2=z_s).to(u.m)
-    c = constants.c
-
-    return (1 + z_l) * (DL * DS / DLS / c).to(u.d)
