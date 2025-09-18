@@ -3,12 +3,7 @@
 ## How to install 
 
 - Clone this repository 
-- At the beginning of a code/notebook you wish to use this, insert
-```
-import sys
-sys.path.insert(1, 'PATH-TO-REPO')
-```
-- Import as you would any other package
+- Navigating to silmarel, use `pip install .` to install the package into a conda environment (python=3.10)
 
 ## Dependencies
 
