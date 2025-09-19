@@ -10,15 +10,15 @@ class ImageData():
                  kwargs_numerics : dict,
                  likeli : str = 'lenstronomy'
                  ):
-        
+
         self.data = kwargs_data['image_data']
         self.kwargs_data = kwargs_data
         self.kwargs_psf = kwargs_psf
-        self.numerics = kwargs_numerics
+        self.kwargs_numerics = kwargs_numerics
 
-        return 
-        
-        
+        return
+
+
 class EMPosteriors():
 
     def __init__(self):

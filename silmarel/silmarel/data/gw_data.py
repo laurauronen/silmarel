@@ -4,6 +4,7 @@ Handle GW data reading and processing.
 
 from typing import Optional
 
+import numpy as np
 from scipy import stats 
 
 from pandas import DataFrame as DF
@@ -18,10 +19,16 @@ class GWData ():
     """
 
     def __init__(self,
+                 n_images,
                  data : Optional[str] = None,
-                 sim : Optional[dict] = None):
+                 sim : Optional[dict] = None,
+                 sim_sigma : Optional[dict] = None):
 
         self.sim = sim
+        self.n_images = n_images
+        self.sim_sigma = sim_sigma
+        
+        self.sigma = []
         self.posteriors = []
         self.mins = []
         #self.keys = ['luminosity_distance', 'ra', 'dec']
@@ -33,19 +40,19 @@ class GWData ():
         if data:
             result = bilby_result.read_in_result(data).posterior
 
-            self.posteriors.append(result['luminosity_distance'].values)
-            #self.posteriors.append(result['ra'])
-            #self.posteriors.append(result['dec'])
+            dl = result['luminosity_distance'].values
+            self.posteriors.append(dl.values)
 
-            self.mins.append(result['luminosity_distance'].values.min())
-            #self.mins.append(result['ra'].min())
-            #self.mins.append(result['dec'].min())
+            self.mins.append(dl.min())
+
+            self.sigma.append(np.std(dl))
 
             for key in result.keys():
                 if 'relative_magnification' in key or 'delta_t' in key:
                     self.posteriors.append(result[key].values)
                     self.mins.append(result[key].values.min())
                     self.keys.append(key)
+                    self.sigma.append(np.std(result[key].values))
 
             self.kde = stats.gaussian_kde(self.posteriors)
             self.density = self.kde(self.posteriors)
@@ -53,6 +60,7 @@ class GWData ():
         elif sim:
 
             self.posteriors.append(sim['luminosity_distance'])
+            self.sigma.append(self.sim_sigma['luminosity_distance'])
 
             for key in sim.keys():
                 if key == 'relative_magnification':
@@ -61,6 +69,7 @@ class GWData ():
                         label = f'relative_magnification_{n}1'
                         self.keys.append(label)
                         self.posteriors.append(mag)
+                        self.sigma.append(mag * self.sim_sigma['relative_magnification'])
                         n += 1
 
                 if key == 'delta_t':
@@ -69,6 +78,7 @@ class GWData ():
                         label = f'delta_t_{n}1'
                         self.keys.append(label)
                         self.posteriors.append(t)
+                        self.sigma.append(t * self.sim_sigma['delta_t'])
                         n += 1
 
         else:

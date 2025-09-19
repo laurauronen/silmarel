@@ -150,5 +150,5 @@ def lens_gw(pointmodel: Optional[Any],
     gw_dictionary['source_ra'] = pointkwargs['ra']
     gw_dictionary['source_dec'] = pointkwargs['dec']
     gw_dictionary['luminosity_distance'] = eff_luminosity_distance.value
-
+    gw_dictionary['z_source'] = z_s
     return gw_dictionary

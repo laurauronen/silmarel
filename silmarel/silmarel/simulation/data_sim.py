@@ -13,6 +13,7 @@ from dataclasses import dataclass
 
 # third party imports
 import numpy as np
+from numpy.typing import ArrayLike
 
 from lenstronomy.Util import image_util, data_util
 from lenstronomy.ImSim.image_model import ImageModel as lens_ImageModel
@@ -28,14 +29,6 @@ class ModelSim():
     """
     Attributes:
     ===========
-    pixelgrid (Any):
-    psf (Any):
-
-    gw_kwargs (dict):
-    gw_data (dict):
-
-    image_data (array):
-        'Observed' simulated optical image.
 
     Methods:
     ========
@@ -92,10 +85,6 @@ class ModelSim():
     def lenstronomy_image(self):
         """
         Create lenstronomy observed image in lenstronomy.
-
-        ARGS
-        ====
-        None
 
         RETURNS
         ======= 

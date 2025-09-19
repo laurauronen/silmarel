@@ -1,1 +1,1 @@
-from . import fast_likeli
+from . import lenstronomy_likeli
