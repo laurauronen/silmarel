@@ -37,10 +37,14 @@ class LenstronomyLikelihood():
         GWData() object for GW localisation.
     models:     dict
         List of EM lens/source models.
+    z_l:        float
+        Lens redshift.
+    z_s:        float / None
+        Source redshift, if not sampled.
+    H0:         float
+        Hubble constant.
     outdir:     str
         Path to outdir. 
-    rewrite:    bool
-        Whether outdir can be safely overwritten.
 
     Methods:
     ========
@@ -55,14 +59,29 @@ class LenstronomyLikelihood():
                 em_prior : dict,
                 gw_prior : dict,
                 models : dict,
-                outdir : str,
-                rewrite : bool = False):
+                z_l : float, 
+                z_s : Optional[float], 
+                H0 : float = 70,
+                outdir : str = 'outdir_silmarel'):
 
         self.em_data = em_data
         self.gw_data = gw_data
         self.em_prior = em_prior
         self.gw_prior = gw_prior
         self.models = models
+
+        if 'z_s' in self.gw_prior.keys():
+            self.sample_z = True
+            self.z_s = None
+        else:
+            self.sample_z = False
+            self.z_s = z_s
+
+        if self.sample_z is False and z_s is None:
+            print('WARNING: No z_s prior or value set. Sampling cannot proceed.')
+
+        self.z_l = z_l
+        self.H0 = H0
 
         self.outdir = outdir
 
@@ -74,7 +93,7 @@ class LenstronomyLikelihood():
             os.mkdir(outdir)
 
         if isinstance(em_data, ImageData):
-            # make lens reconstruction inference settings
+            # set lens reconstruction inference settings
             self.kwargs_likelihood = {'source_marg': False}
             self.multi_band_list = [
                 [em_data.kwargs_data,
@@ -97,12 +116,13 @@ class LenstronomyLikelihood():
             self.lens_plot = None
             self.em_posterior = None
             self.em_params = None
+            self.gw_posterior = None
+            self.gw_params = None
 
         elif isinstance(em_data, EMPosteriors):
+            # fixme : directly add posterior handling if data provided is right format
             self.em_posterior = 1
             self.em_params = 1
-
-        return
 
     def run_lens_reconstruction(self,
                                 fit_seq : list):
@@ -118,8 +138,6 @@ class LenstronomyLikelihood():
 
         self.chain_list = self.fitting_seq.fit_sequence(fit_seq)
         self.kwargs_result = self.fitting_seq.best_fit()
-
-        return
 
     def plot_reconstruction(self):
         """
@@ -185,36 +203,35 @@ class LenstronomyLikelihood():
         f.subplots_adjust(left=None, bottom=None, right=None, top=None, wspace=0., hspace=0.05)
         plt.savefig(self.outdir+'/decomposition.png')
 
-        sampler_type, samples_mcmc, param_mcmc, dist_mcmc  = self.chain_list[1]
+        _, samples_mcmc, param_mcmc, _  = self.chain_list[1]
         for i in range(len(self.chain_list)):
             chain_plot.plot_chain_list(self.chain_list, i)
         plt.savefig(self.outdir+'/chains.png')
 
+        # save posterior results
         self.em_posterior = samples_mcmc
         self.em_params = param_mcmc
 
-        return
-
     def run_gw_localisation(self,
-                            z_l : float,
-                            z_s : Optional[float],
-                            H0 : float = 70,
                             sampler : str = 'emcee',
                             n_iter : int = 1000,
                             ):
+        """
+        Function to run GW localisation/reconstruction.
+
+        ARGS
+        ====
+        sampler:    str
+            Selected sampler. 
+            Options: emcee
+        n_iter:     int
+            Number of iteractions/steps.
+
+        RETURNS
+        =======
+        """
 
         prior = self.gw_prior
-        self.z_l = z_l
-        self.z_s = z_s
-        self.H0 = H0
-
-        if 'z_s' in self.gw_prior.keys():
-            self.sample_z = True
-        else: 
-            self.sample_z = z_s
-
-        if self.sample_z is False and z_s is None:
-            print('WARNING: No z_s prior or value set. Sampling cannot proceed.')
 
         if sampler == 'emcee':
             ndim = len(prior.keys())
@@ -252,7 +269,6 @@ class LenstronomyLikelihood():
                 fig = corner(flat_samples,
                              labels=labels)
             plt.savefig(self.outdir+'/bbh_corner.png')
-        return
 
     def log_prob(self, theta):
 
@@ -344,5 +360,6 @@ class LenstronomyLikelihood():
             for k, param in enumerate(self.gw_data.posteriors):
                 log_l += -0.5 * (gw_model_data.posteriors[k] - param)**2 / self.gw_data.sigma[k]**2
         #elif sim is False: 
+        # TODO
 
         return log_l
