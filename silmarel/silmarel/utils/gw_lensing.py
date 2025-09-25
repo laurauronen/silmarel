@@ -23,13 +23,17 @@ def tdd (z_l: float,
 
     ARGS
     ====
-    z_lens      Lens redshift
-    z_source    Source redshift
-    H0          Hubble constant for chosen cosmology
+    z_lens (float):
+        Lens redshift
+    z_source (float):
+        Source redshift
+    H0 (float):
+        Hubble constant for chosen cosmology
 
     RETURNS
     =======
-                Time delay distance value.
+    (float):        
+        Time delay distance value.
 
     """
 
@@ -55,68 +59,93 @@ def lens_gw(pointmodel: Optional[Any],
 
     ARGS
     ====
-    pointmodel          Herculens PointSource model for GW.
-    pointkwargs         List-wrapped dictionary with GW ra, dec.
-    massmodel           Herculens MassModel/Lenstronomy LensModel object.
-    lenskwargs          Herculens/Lenstronomy lens parameters.
-    z_l                 Lens redshift.
-    z_s                 Source redshift.
-    H0                  Hubble constant.
-    n_images            Number of images to compare against.
-                        If None:    will return the normal GW dictionary.
-                        If float:   will check if length of GW parameters 
-                                    matches given data.
-                                    If not, returns a dummy dictionary without values.
-    jax                 If True, uses Herculens, else uses Lenstronomy.
+    pointmodel (Any):
+        Herculens PointSource model for GW.
+    pointkwargs (list):
+        List-wrapped dictionary with GW ra, dec.
+    massmodel (Any):
+        Herculens MassModel/Lenstronomy LensModel object.
+    lenskwargs (list):
+        Herculens/Lenstronomy lens parameters.
+    z_l (float):
+        Lens redshift.
+    z_s (float):
+        Source redshift.
+    H0  (float):
+        Hubble constant. Default H0 = 70
+    n_images (int):
+        Number of images to compare against.
+        If None:    will return the normal GW dictionary.
+        If float:   will check if length of GW parameters 
+                    matches given data.
+                    If not, returns a dummy dictionary without values.
+    jax (bool):
+        If True, uses Herculens, else uses Lenstronomy.
 
     RETURNS
     =======
-    gw_dictionary       Dictionary with time delays, relative magnifications,
-                        image positions, source position, effective 
-                        luminosity distance. 
+    gw_dictionary (dict):
+        Dictionary with time delays, relative magnifications,
+        image positions, source position, effective 
+        luminosity distance. 
     """
 
     cosmo = FlatLambdaCDM(H0=H0, Om0=0.3)
     luminosity_distance = cosmo.luminosity_distance(z_s)
 
-    if jax is True:
-        arcsec = 2 * np.pi / 360 / 3600
+    # conversion factor
+    arcsec = 2 * np.pi / 360 / 3600
 
+    if jax is True:
+        # solve image positions
         theta_ra, theta_dec = \
             pointmodel.image_positions(pointkwargs, kwargs_lens=lenskwargs)
 
+        # remove all duplicates
         size = jnp.size(theta_ra) - 1
         unique_x = jnp.unique(theta_ra, return_index=True, size=size)[1]
         theta_ra = theta_ra[unique_x]
         theta_dec = theta_dec[unique_x]
 
+        # compute fermat potential
         fermat_potential = \
             massmodel.fermat_potential(y_image=theta_dec, x_image=theta_ra,
             kwargs_lens=lenskwargs,
             x_source=pointkwargs['ra'],
             y_source=pointkwargs['dec'])
 
+        # convert fermat potential
         fermat_potential = fermat_potential * (arcsec ** 2)
+
+        # solve time delay distance
         dt_distance = tdd(z_l, z_s, cosmo).value
+
+        # get arrival times and magnifications
         arrival_times = jnp.array(dt_distance * fermat_potential)
         magnifications = \
             jnp.array(massmodel.magnification(theta_ra, theta_dec, lenskwargs))
-    else: 
+    else:
+        # set lenstronomy solver and solve image positions
         solver = LensEquationSolver(lensModel = massmodel)
         theta_ra, theta_dec = \
             solver.image_position_from_source(pointkwargs['ra'],
                                                 pointkwargs['dec'],
                                                 lenskwargs)
 
+        # get magnifications and arrival times
         magnifications = massmodel.magnification(theta_ra, theta_dec, lenskwargs)
         arrival_times = massmodel.arrival_time(theta_ra, theta_dec, lenskwargs)
 
+    # compute effective luminosity distance of first image
     eff_luminosity_distance = luminosity_distance / magnifications[0]
 
+    # compute relative parameters for GW lensing
     time_delays = (arrival_times - arrival_times[0])[1:]
     relative_magnifications = (magnifications / magnifications[0])[1:]
 
+    # if provided with number of images
     if n_images:
+        # if match, return dict
         if len(time_delays) == n_images - 1:
             gw_dictionary = {
                             'image_ra': theta_ra,
@@ -124,6 +153,8 @@ def lens_gw(pointmodel: Optional[Any],
                             'delta_t' : time_delays,
                             'relative_magnification' : relative_magnifications
                             }
+
+        # if no match, set dummy values
         else:
             if jax is True:
                 gw_dictionary = {'image_ra': - jnp.ones(n_images) * jnp.inf,
@@ -139,6 +170,8 @@ def lens_gw(pointmodel: Optional[Any],
                                 'relative_magnification' : \
                                     - np.ones(n_images - 1) * np.inf
                                 }
+
+    # if no image number just return lensed dict
     else:
         gw_dictionary = {
                         'image_ra': theta_ra, 
@@ -147,8 +180,10 @@ def lens_gw(pointmodel: Optional[Any],
                         'relative_magnification' : relative_magnifications
                         }
 
+    # add missing keywords in dict
     gw_dictionary['source_ra'] = pointkwargs['ra']
     gw_dictionary['source_dec'] = pointkwargs['dec']
     gw_dictionary['luminosity_distance'] = eff_luminosity_distance.value
     gw_dictionary['z_source'] = z_s
+
     return gw_dictionary

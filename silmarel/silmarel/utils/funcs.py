@@ -1,3 +1,9 @@
+"""
+Generate a random position using the flux per pixel for probabilities.
+
+Useful e.g. to generate random BBH source positions given host profile image.
+"""
+
 import array
 
 import numpy as np 
