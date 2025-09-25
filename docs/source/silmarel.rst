@@ -11,16 +11,16 @@ needed for MM-lens reconstruction.
 
 .. py:function:: silmarel.utils.gw_lensing.lens_gw(pointmodel, pointkwargs, massmodel, lenskwargs, z_l, z_s, H0, n_images, jax)
 
-   Return a list of random ingredients as strings.
+   Using a given mass model and GW source position, compute lensed GW data (magnifications, time delays, image positions, effective luminosity distance).
 
    :param pointmodel: Herculens PointSource model.
    :type pointmodel: Any or None
    :param pointkwargs: Herculens PointSource list-wrapped parameter dict.
-   :type pointkwargs: list
+   :type pointkwargs: list[dict]
    :param massmodel: Herculens MassModel or Lenstronomy LensModel object.
    :type massmodel: Any
    :param lenskwargs: List-wrapped lens parameters.
-   :type lenskwargs: list
+   :type lenskwargs: list[dict]
    :param z_l: Lens redshift.
    :type z_l: float
    :param z_s: Source redshift.
@@ -33,8 +33,8 @@ needed for MM-lens reconstruction.
    :type jax: bool
 
 
-   :return: The ingredients list.
-   :rtype: list[str]
+   :return: Lensed GW information.
+   :rtype: dict
 
 Simulation
 ----------
