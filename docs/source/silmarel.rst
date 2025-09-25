@@ -9,14 +9,7 @@ lensing is the `silmarel.utils.gw_lensing.lens_gw()`. This tool takes in a lens 
 a gravitational wave source position, and returns the time delays and magnifications
 needed for MM-lens reconstruction.
 
-.. py:function:: silmarel.utils.gw_lensing.lens_gw(pointmodel,
-                                                    pointkwargs,
-                                                    massmodel,
-                                                    lenskwargs,
-                                                    z_l, z_s,
-                                                    H0, 
-                                                    n_images, 
-                                                    jax)
+.. py:function:: silmarel.utils.gw_lensing.lens_gw(pointmodel, pointkwargs, massmodel, lenskwargs, z_l, z_s, H0, n_images, jax)
 
    Return a list of random ingredients as strings.
 
