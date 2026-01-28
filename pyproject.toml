@@ -1,0 +1,19 @@
+[project]
+name = "silmarel"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "arviz>=0.23.1",
+    "astropy>=6.1.7",
+    "bilby>=2.7.1",
+    "jax>=0.6.2",
+    "jaxopt>=0.8.5",
+    "lenstronomy>=1.13.5",
+    "logging>=0.4.9.6",
+    "nifty8>=8.5.7",
+    "numpyro>=0.19.0",
+    "optax>=0.2.6",
+    "tqdm>=4.67.1",
+]
