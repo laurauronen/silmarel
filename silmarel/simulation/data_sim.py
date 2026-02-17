@@ -8,18 +8,21 @@ Date: 03-Sept-2025
 """
 
 # standard imports
+import os
 from typing import Any, Optional
 from dataclasses import dataclass
 
 # third party imports
 import numpy as np
 from numpy.typing import ArrayLike
+import matplotlib.pyplot as plt
 
 from lenstronomy.Util import image_util, data_util
 from lenstronomy.ImSim.image_model import ImageModel as lens_ImageModel
 from lenstronomy.Data.imaging_data import ImageData as lens_ImageData
 from lenstronomy.Data.pixel_grid import PixelGrid as lens_PixelGrid
 from lenstronomy.Data.psf import PSF as lens_PSF
+from lenstronomy.Plots import lens_plot
 
 # local imports 
 #from ..utils.herculens_gw import *
@@ -41,18 +44,24 @@ class ModelSim():
                  models: list[Any],
                  kwargs_models : list[list],
                  kwargs_settings : list[dict],
+                 outdir : str,
                  gw_kwargs : Optional[dict] = None,
                  H0 : float = 70, 
                  likeli: str = 'lenstronomy'):
 
+        self.outdir = outdir
+
+        if not os.path.exists(outdir):
+            os.mkdir(outdir)
+
         lensmass, sourcelight, lenslight = models
-        kwargs_mass, kwargs_source, kwargs_llight = kwargs_models
+        kwargs_mass, kwargs_source, kwargs_light = kwargs_models
         self.models = ModelParams(lensmass,
                                   sourcelight,
                                   lenslight,
                                   kwargs_mass,
                                   kwargs_source,
-                                  kwargs_llight)
+                                  kwargs_light)
 
         kwargs_data, kwargs_psf, kwargs_pixel, kwargs_numerics = kwargs_settings
         self.settings = DataParams(kwargs_data, kwargs_psf, kwargs_pixel, kwargs_numerics)
@@ -120,6 +129,11 @@ class ModelSim():
         image_real = imageLens + poisson + bkg
         data_class.update_data(image_real)
         self.settings.kwargs_data['image_data'] = image_real
+
+        fig, ax = plt.subplots(1, 1, figsize=(10, 10))
+        lens_plot.lens_model_plot(ax, lensModel=self.models.LensMass, kwargs_lens=self.models.mass_kwargs, sourcePos_x=self.gw_data['source_ra'], sourcePos_y=self.gw_data['source_dec'], point_source=True, with_caustics=True, fast_caustic=True)
+        plt.savefig(self.outdir+'/lens_plot.png')
+        plt.close()
 
         return image_real
 
