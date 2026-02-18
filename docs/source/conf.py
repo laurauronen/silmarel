@@ -6,6 +6,12 @@
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
+[build-system]
+requires = ["setuptools", "setuptools-scm"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools_scm]
+
 project = 'silmarel'
 copyright = '2025, Laura E. Uronen, Justin Janquart, Otto A. Hannuksela'
 author = 'Laura E. Uronen, Justin Janquart, Otto A. Hannuksela'
@@ -40,6 +46,9 @@ master_doc = 'index'
 templates_path = ['_templates']
 exclude_patterns = []
 
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["silmarel*"]
 
 
 # -- Options for HTML output -------------------------------------------------
