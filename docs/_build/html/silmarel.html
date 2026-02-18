@@ -41,41 +41,6 @@
 lensing is the <cite>silmarel.utils.gw_lensing.lens_gw()</cite>. This tool takes in a lens model,
 a gravitational wave source position, and returns the time delays and magnifications
 needed for MM-lens reconstruction.</p>
-<dl class="py function">
-<dt class="sig sig-object py" id="silmarel.utils.gw_lensing.lens_gw">
-<span class="sig-prename descclassname"><span class="pre">silmarel.utils.gw_lensing.</span></span><span class="sig-name descname"><span class="pre">lens_gw</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pointmodel</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pointkwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">massmodel</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lenskwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z_l</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z_s</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">H0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">70</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_images</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">likelihood</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'lenstronomy'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="headerlink" href="#silmarel.utils.gw_lensing.lens_gw" title="Link to this definition">¶</a></dt>
-<dd><p>Function to simulate a lensed gravitational wave.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>pointmodel</strong> (<em>Any</em>) – Herculens PointSource model for GW.</p></li>
-<li><p><strong>pointkwargs</strong> (<em>list</em>) – List-wrapped dictionary with GW ra, dec.</p></li>
-<li><p><strong>massmodel</strong> (<em>Any</em>) – Herculens MassModel/Lenstronomy LensModel object.</p></li>
-<li><p><strong>lenskwargs</strong> (<em>list</em>) – Herculens/Lenstronomy lens parameters.</p></li>
-<li><p><strong>z_l</strong> (<em>float</em>) – Lens redshift.</p></li>
-<li><p><strong>z_s</strong> (<em>float</em>) – Source redshift.</p></li>
-<li><p><strong>H0</strong> (<em>float</em><em>, </em><em>optional</em>) – Hubble constant (default is 70)</p></li>
-<li><p><strong>n_images</strong> (<em>int</em><em> or </em><em>float</em><em> or </em><em>None</em><em>, </em><em>optional</em>) – <p>Number of images to compare against.
-- If None: returns the normal GW dictionary.
-- If float: checks if length of GW parameters matches data.</p>
-<blockquote>
-<div><p>If not, returns a dummy dictionary without values.</p>
-</div></blockquote>
-</p></li>
-<li><p><strong>likelihood</strong> (<em>str</em><em>, </em><em>optional</em>) – If ‘herculens’, uses Herculens; else uses Lenstronomy.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Dictionary with time delays, relative magnifications,
-image positions, source position, effective
-luminosity distance.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>dict</p>
-</dd>
-</dl>
-</dd></dl>
-
 </section>
 <section id="module-silmarel.simulation.data_sim">
 <span id="simulation"></span><h2>Simulation<a class="headerlink" href="#module-silmarel.simulation.data_sim" title="Link to this heading">¶</a></h2>
@@ -84,20 +49,140 @@ lenstronomy/herculens and include lensed GW simulation for
 complete lensed MM simulations.</p>
 <p>Author: Laura E. Uronen
 Date: 03-Sept-2025</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="silmarel.simulation.data_sim.DataParams">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">silmarel.simulation.data_sim.</span></span><span class="sig-name descname"><span class="pre">DataParams</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">kwargs_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kwargs_psf</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kwargs_pixel</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kwargs_numerics</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#silmarel.simulation.data_sim.DataParams" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="silmarel.simulation.data_sim.DataParams.kwargs_data">
+<span class="sig-name descname"><span class="pre">kwargs_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#silmarel.simulation.data_sim.DataParams.kwargs_data" title="Link to this definition">¶</a></dt>
+<dd><p>Data parameters.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="silmarel.simulation.data_sim.DataParams.kwargs_psf">
+<span class="sig-name descname"><span class="pre">kwargs_psf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#silmarel.simulation.data_sim.DataParams.kwargs_psf" title="Link to this definition">¶</a></dt>
+<dd><p>PSF settings.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="silmarel.simulation.data_sim.DataParams.kwargs_pixel">
+<span class="sig-name descname"><span class="pre">kwargs_pixel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#silmarel.simulation.data_sim.DataParams.kwargs_pixel" title="Link to this definition">¶</a></dt>
+<dd><p>Pixel grid settings.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="silmarel.simulation.data_sim.DataParams.kwargs_numerics">
+<span class="sig-name descname"><span class="pre">kwargs_numerics</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#silmarel.simulation.data_sim.DataParams.kwargs_numerics" title="Link to this definition">¶</a></dt>
+<dd><p>Additional settings.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id0">
+<span class="sig-name descname"><span class="pre">kwargs_data</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span></em><a class="headerlink" href="#id0" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id1">
+<span class="sig-name descname"><span class="pre">kwargs_numerics</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span></em><a class="headerlink" href="#id1" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id2">
+<span class="sig-name descname"><span class="pre">kwargs_pixel</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span></em><a class="headerlink" href="#id2" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id3">
+<span class="sig-name descname"><span class="pre">kwargs_psf</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span></em><a class="headerlink" href="#id3" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="silmarel.simulation.data_sim.ModelParams">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">silmarel.simulation.data_sim.</span></span><span class="sig-name descname"><span class="pre">ModelParams</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">LensMass</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">SourceLight</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">LensLight</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mass_kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">source_kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lenslight_kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#silmarel.simulation.data_sim.ModelParams" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<section id="attributes">
+<h3>Attributes:<a class="headerlink" href="#attributes" title="Link to this heading">¶</a></h3>
+<dl class="simple">
+<dt>LensMass (Any):</dt><dd><p>LensModel/MassModel object.</p>
+</dd>
+<dt>SourceLight (Any):</dt><dd><p>LightModel object for source.</p>
+</dd>
+<dt>LensLight (Any):</dt><dd><p>LightModel object for lens.</p>
+</dd>
+<dt>mass_kwargs (list):</dt><dd><p>List of dictionaries for lens mass.</p>
+</dd>
+<dt>source_kwargs (list):</dt><dd><p>List of dictionaries for source.</p>
+</dd>
+<dt>lenslight_kwargs (list):</dt><dd><p>List of dictionaries for lens light.</p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="silmarel.simulation.data_sim.ModelParams.LensLight">
+<span class="sig-name descname"><span class="pre">LensLight</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Any</span></em><a class="headerlink" href="#silmarel.simulation.data_sim.ModelParams.LensLight" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="silmarel.simulation.data_sim.ModelParams.LensMass">
+<span class="sig-name descname"><span class="pre">LensMass</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Any</span></em><a class="headerlink" href="#silmarel.simulation.data_sim.ModelParams.LensMass" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="silmarel.simulation.data_sim.ModelParams.SourceLight">
+<span class="sig-name descname"><span class="pre">SourceLight</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Any</span></em><a class="headerlink" href="#silmarel.simulation.data_sim.ModelParams.SourceLight" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="silmarel.simulation.data_sim.ModelParams.lenslight_kwargs">
+<span class="sig-name descname"><span class="pre">lenslight_kwargs</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span></em><a class="headerlink" href="#silmarel.simulation.data_sim.ModelParams.lenslight_kwargs" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="silmarel.simulation.data_sim.ModelParams.mass_kwargs">
+<span class="sig-name descname"><span class="pre">mass_kwargs</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span></em><a class="headerlink" href="#silmarel.simulation.data_sim.ModelParams.mass_kwargs" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="silmarel.simulation.data_sim.ModelParams.source_kwargs">
+<span class="sig-name descname"><span class="pre">source_kwargs</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span></em><a class="headerlink" href="#silmarel.simulation.data_sim.ModelParams.source_kwargs" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</section>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="silmarel.simulation.data_sim.ModelSim">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">silmarel.simulation.data_sim.</span></span><span class="sig-name descname"><span class="pre">ModelSim</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">models</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kwargs_models</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">list</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kwargs_settings</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outdir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gw_kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">H0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">70</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">likeli</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'lenstronomy'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#silmarel.simulation.data_sim.ModelSim" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<section id="id4">
+<h3>Attributes:<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h3>
+</section>
+<section id="methods">
+<h3>Methods:<a class="headerlink" href="#methods" title="Link to this heading">¶</a></h3>
+<p>lenstronomy_image</p>
+<p>herculens_image</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="silmarel.simulation.data_sim.ModelSim.lenstronomy_image">
+<span class="sig-name descname"><span class="pre">lenstronomy_image</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#silmarel.simulation.data_sim.ModelSim.lenstronomy_image" title="Link to this definition">¶</a></dt>
+<dd><p>Create lenstronomy observed image in lenstronomy.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>image_real</strong> – Image data array.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>array</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</dd></dl>
+
 </section>
 <section id="data">
 <h2>Data<a class="headerlink" href="#data" title="Link to this heading">¶</a></h2>
-<dl class="py function">
-<dt class="sig sig-object py" id="silmarel.data.em_data">
-<span class="sig-prename descclassname"><span class="pre">silmarel.data.</span></span><span class="sig-name descname"><span class="pre">em_data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#silmarel.data.em_data" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="silmarel.data.gw_data">
-<span class="sig-prename descclassname"><span class="pre">silmarel.data.</span></span><span class="sig-name descname"><span class="pre">gw_data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#silmarel.data.gw_data" title="Link to this definition">¶</a></dt>
-<dd><p>Handle GW data reading and processing.</p>
-</dd></dl>
-
 </section>
 <section id="likelihood">
 <h2>Likelihood<a class="headerlink" href="#likelihood" title="Link to this heading">¶</a></h2>
@@ -133,16 +218,35 @@ Date: 03-Sept-2025</p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">silmarel</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#utils">Utils</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#silmarel.utils.gw_lensing.lens_gw"><code class="docutils literal notranslate"><span class="pre">lens_gw()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#utils">Utils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-silmarel.simulation.data_sim">Simulation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#silmarel.simulation.data_sim.DataParams"><code class="docutils literal notranslate"><span class="pre">DataParams</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#silmarel.simulation.data_sim.DataParams.kwargs_data"><code class="docutils literal notranslate"><span class="pre">DataParams.kwargs_data</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#silmarel.simulation.data_sim.DataParams.kwargs_psf"><code class="docutils literal notranslate"><span class="pre">DataParams.kwargs_psf</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#silmarel.simulation.data_sim.DataParams.kwargs_pixel"><code class="docutils literal notranslate"><span class="pre">DataParams.kwargs_pixel</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#silmarel.simulation.data_sim.DataParams.kwargs_numerics"><code class="docutils literal notranslate"><span class="pre">DataParams.kwargs_numerics</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id0"><code class="docutils literal notranslate"><span class="pre">DataParams.kwargs_data</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id1"><code class="docutils literal notranslate"><span class="pre">DataParams.kwargs_numerics</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id2"><code class="docutils literal notranslate"><span class="pre">DataParams.kwargs_pixel</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id3"><code class="docutils literal notranslate"><span class="pre">DataParams.kwargs_psf</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#module-silmarel.simulation.data_sim">Simulation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#data">Data</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#silmarel.data.em_data"><code class="docutils literal notranslate"><span class="pre">em_data()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#silmarel.data.gw_data"><code class="docutils literal notranslate"><span class="pre">gw_data()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#silmarel.simulation.data_sim.ModelParams"><code class="docutils literal notranslate"><span class="pre">ModelParams</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#silmarel.simulation.data_sim.ModelParams.LensLight"><code class="docutils literal notranslate"><span class="pre">ModelParams.LensLight</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#silmarel.simulation.data_sim.ModelParams.LensMass"><code class="docutils literal notranslate"><span class="pre">ModelParams.LensMass</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#silmarel.simulation.data_sim.ModelParams.SourceLight"><code class="docutils literal notranslate"><span class="pre">ModelParams.SourceLight</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#silmarel.simulation.data_sim.ModelParams.lenslight_kwargs"><code class="docutils literal notranslate"><span class="pre">ModelParams.lenslight_kwargs</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#silmarel.simulation.data_sim.ModelParams.mass_kwargs"><code class="docutils literal notranslate"><span class="pre">ModelParams.mass_kwargs</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#silmarel.simulation.data_sim.ModelParams.source_kwargs"><code class="docutils literal notranslate"><span class="pre">ModelParams.source_kwargs</span></code></a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="#silmarel.simulation.data_sim.ModelSim"><code class="docutils literal notranslate"><span class="pre">ModelSim</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#silmarel.simulation.data_sim.ModelSim.lenstronomy_image"><code class="docutils literal notranslate"><span class="pre">ModelSim.lenstronomy_image()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#data">Data</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#likelihood">Likelihood</a></li>
 </ul>
 </li>
