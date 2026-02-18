@@ -18,3 +18,14 @@ dependencies = [
     "pymultinest>=2.12",
     "tqdm>=4.67.1",
 ]
+
+[dependency-groups]
+docs = [
+  "myst-parser",
+  "pydata-sphinx-theme",
+  "sphinx",
+  "sphinx-argparse",
+  "sphinx-copybutton",
+  "sphinx-design",
+  "sphinx-github-style",
+]
