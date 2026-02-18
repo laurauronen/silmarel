@@ -48,33 +48,6 @@
 lensing is the <cite>silmarel.utils.gw_lensing.lens_gw()</cite>. This tool takes in a lens model,
 a gravitational wave source position, and returns the time delays and magnifications
 needed for MM-lens reconstruction.</p>
-<dl class="py function">
-<dt class="sig sig-object py" id="silmarel.utils.gw_lensing.lens_gw">
-<span class="sig-prename descclassname"><span class="pre">silmarel.utils.gw_lensing.</span></span><span class="sig-name descname"><span class="pre">lens_gw</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pointmodel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pointkwargs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">massmodel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lenskwargs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z_l</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z_s</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">H0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_images</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">jax</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#silmarel.utils.gw_lensing.lens_gw" title="Link to this definition">¶</a></dt>
-<dd><p>Using a given mass model and GW source position, compute lensed GW data (magnifications, time delays, image positions, effective luminosity distance).</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>pointmodel</strong> (<em>Any</em><em> or </em><em>None</em>) – Herculens PointSource model.</p></li>
-<li><p><strong>pointkwargs</strong> (<em>list</em><em>[</em><em>dict</em><em>]</em>) – Herculens PointSource list-wrapped parameter dict.</p></li>
-<li><p><strong>massmodel</strong> (<em>Any</em>) – Herculens MassModel or Lenstronomy LensModel object.</p></li>
-<li><p><strong>lenskwargs</strong> (<em>list</em><em>[</em><em>dict</em><em>]</em>) – List-wrapped lens parameters.</p></li>
-<li><p><strong>z_l</strong> (<em>float</em>) – Lens redshift.</p></li>
-<li><p><strong>z_s</strong> (<em>float</em>) – Source redshift.</p></li>
-<li><p><strong>H0</strong> (<em>float</em>) – Hubble constant, default = 70.</p></li>
-<li><p><strong>n_images</strong> (<em>int</em>) – If provided, checks that GW parameters match given number of images.</p></li>
-<li><p><strong>jax</strong> (<em>bool</em>) – If True, use Herculens, else use Lenstronomy.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Lensed GW information.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>dict</p>
-</dd>
-</dl>
-</dd></dl>
-
 </section>
 <section id="simulation">
 <h2>Simulation<a class="headerlink" href="#simulation" title="Link to this heading">¶</a></h2>
@@ -116,10 +89,7 @@ needed for MM-lens reconstruction.</p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">silmarel</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#utils">Utils</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#silmarel.utils.gw_lensing.lens_gw"><code class="docutils literal notranslate"><span class="pre">silmarel.utils.gw_lensing.lens_gw()</span></code></a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="#utils">Utils</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#simulation">Simulation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#data">Data</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#likelihood">Likelihood</a></li>

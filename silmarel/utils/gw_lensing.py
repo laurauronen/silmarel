@@ -47,13 +47,11 @@ def tdd (z_l: float,
     float
         Time delay distance value.
     """
-
-    DL = cosmo.angular_diameter_distance(z=z_l).to(u.m)
-    DS = cosmo.angular_diameter_distance(z=z_s).to(u.m)
-    DLS = cosmo.angular_diameter_distance_z1z2(z1=z_l, z2=z_s).to(u.m)
-    c = constants.c
-
-    return (1 + z_l) * (DL * DS / DLS / c).to(u.d)
+  DL = cosmo.angular_diameter_distance(z=z_l).to(u.m)
+  DS = cosmo.angular_diameter_distance(z=z_s).to(u.m)
+  DLS = cosmo.angular_diameter_distance_z1z2(z1=z_l, z2=z_s).to(u.m)
+  c = constants.c
+  return (1 + z_l) * (DL * DS / DLS / c).to(u.d)
 
 def lens_gw(pointmodel: Optional[Any],
             pointkwargs: list[dict],
@@ -98,7 +96,7 @@ def lens_gw(pointmodel: Optional[Any],
         image positions, source position, effective 
         luminosity distance.
     """
-
+    
     cosmo = FlatLambdaCDM(H0=H0, Om0=0.3)
     luminosity_distance = cosmo.luminosity_distance(z_s)
 
