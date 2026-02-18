@@ -12,4 +12,4 @@ Submodules
 .. toctree::
    :maxdepth: 4
 
-   silmarel.simulation.data_sim
+   silmarel.simulation.lenstronomy_sim
