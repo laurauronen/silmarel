@@ -9,7 +9,7 @@
 project = 'silmarel'
 copyright = '2025, Laura E. Uronen, Justin Janquart, Otto A. Hannuksela'
 author = 'Laura E. Uronen, Justin Janquart, Otto A. Hannuksela'
-release = '0.1'
+release = '0.0.1'
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
