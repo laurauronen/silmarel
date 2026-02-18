@@ -19,18 +19,7 @@ linkcode_url = "https://git.ligo.org/lauraelina.uronen/silmarel/-/blob/main/{pat
 extensions = [
     "sphinx.ext.autodoc",
     "sphinx.ext.autosummary",
-    "sphinx.ext.coverage",
-    "sphinx.ext.doctest",
-    "sphinx.ext.extlinks",
-    "sphinx.ext.ifconfig",
-    "sphinx.ext.inheritance_diagram",
-    "sphinx.ext.intersphinx",
-    "sphinx.ext.linkcode",
     "sphinx.ext.napoleon",
-    "sphinx_copybutton",
-    "sphinx_design",
-    "sphinx_github_style",
-    "sphinxarg.ext",
 ]
 
 
