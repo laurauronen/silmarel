@@ -10,18 +10,30 @@ a gravitational wave source position, and returns the time delays and magnificat
 needed for MM-lens reconstruction.
 
 .. autofunction:: silmarel.utils.gw_lensing.lens_gw
+       :members:
+       :undoc-members:
+       :show-inheritance:
 
 Simulation
 ----------
 
 .. automodule:: silmarel.simulation.data_sim
+   :members:
+   :undoc-members:
+   :show-inheritance:
    
 Data
 ----
 
 .. autofunction:: silmarel.data.em_data
+       :members:
+       :undoc-members:
+       :show-inheritance:
 
 .. autofunction:: silmarel.data.gw_data
+       :members:
+       :undoc-members:
+       :show-inheritance:
 
 Likelihood 
 ----------
