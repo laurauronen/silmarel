@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>silmarel.utils.funcs module &#8212; silmarel 0.0.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="../_static/basic.css?v=686e5160" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=27fed22d" />
+    <script src="../_static/documentation_options.js?v=d45e8c67"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="silmarel.utils.gw_lensing module" href="silmarel.utils.gw_lensing.html" />
+    <link rel="prev" title="silmarel.utils package" href="silmarel.utils.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="module-silmarel.utils.funcs">
+<span id="silmarel-utils-funcs-module"></span><h1>silmarel.utils.funcs module<a class="headerlink" href="#module-silmarel.utils.funcs" title="Link to this heading">¶</a></h1>
+<p>Generate a random position using the flux per pixel for probabilities.</p>
+<p>Useful e.g. to generate random BBH source positions given host profile image.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="silmarel.utils.funcs.random_position_generator">
+<span class="sig-prename descclassname"><span class="pre">silmarel.utils.funcs.</span></span><span class="sig-name descname"><span class="pre">random_position_generator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nrand</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#silmarel.utils.funcs.random_position_generator" title="Link to this definition">¶</a></dt>
+<dd><p>Generate a random position within the image weighted by the pixel values.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>image</strong> (<em>2D numpy array</em>) – The image to generate random positions from.</p></li>
+<li><p><strong>nrand</strong> (<em>int</em>) – The number of random positions to generate.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>rand_pos</strong> – The random positions generated.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>2D numpy array</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">silmarel</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../silmarel.html">silmarel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributing</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="silmarel.html">silmarel package</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="silmarel.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="silmarel.data.html">silmarel.data package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="silmarel.likelihood.html">silmarel.likelihood package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="silmarel.simulation.html">silmarel.simulation package</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="silmarel.utils.html">silmarel.utils package</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="silmarel.utils.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l5 current"><a class="current reference internal" href="#">silmarel.utils.funcs module</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="#silmarel.utils.funcs.random_position_generator"><code class="docutils literal notranslate"><span class="pre">random_position_generator()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="silmarel.utils.gw_lensing.html">silmarel.utils.gw_lensing module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="silmarel.html">silmarel package</a><ul>
+  <li><a href="silmarel.utils.html">silmarel.utils package</a><ul>
+      <li>Previous: <a href="silmarel.utils.html" title="previous chapter">silmarel.utils package</a></li>
+      <li>Next: <a href="silmarel.utils.gw_lensing.html" title="next chapter">silmarel.utils.gw_lensing module</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2025, Laura E. Uronen, Justin Janquart, Otto A. Hannuksela.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 8.1.3</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+      |
+      <a href="../_sources/api/silmarel.utils.funcs.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

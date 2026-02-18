@@ -25,7 +25,5 @@ Contents
 .. toctree::
 
    usage
-   silmarel
+   api/silmarel
    contributing
-
-
