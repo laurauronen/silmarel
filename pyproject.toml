@@ -10,14 +10,14 @@ name = "silmarel"
 authors = [
     {name="Laura Uronen", email="lauraelina.uronen@ligo.org"},
     {name="Justin Janquart", email="justin.janquart@ligo.org"},
-    {name="Otto Hannuksela", email="otto.hannuksela@ligo.org},
+    {name="Otto Hannuksela", email="otto.hannuksela@ligo.org"},
     {name="Mick Wright", email="mick.wright@ligo.org"},
 ]
 
 maintainers = [
     {name="Laura Uronen", email="lauraelina.uronen@ligo.org"},
     {name="Justin Janquart", email="justin.janquart@ligo.org"},
-    {name="Otto Hannuksela", email="otto.hannuksela@ligo.org},
+    {name="Otto Hannuksela", email="otto.hannuksela@ligo.org"},
     {name="Mick Wright", email="mick.wright@ligo.org"},
 ]
 
