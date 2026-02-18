@@ -14,5 +14,5 @@ from the repository:
 .. code-block:: console
 
    git clone https://github.com/laurauronen/silmarel.git
-   cd silmarel/silmarel/
+   cd silmarel/
    pip install .

@@ -6,19 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>silmarel &#8212; silmarel 0.0.1 documentation</title>
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=0745d1ac" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=5ecbeea2" />
     <link rel="stylesheet" type="text/css" href="_static/basic.css?v=686e5160" />
     <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=27fed22d" />
-    <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
-    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/github_style.css?v=1093691d" />
-    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
     <script src="_static/documentation_options.js?v=d45e8c67"></script>
     <script src="_static/doctools.js?v=9bcbadda"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
-    <script src="_static/copybutton.js?v=f281be69"></script>
-    <script src="_static/design-tabs.js?v=f930bc37"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Contributing" href="contributing.html" />
@@ -48,12 +41,63 @@
 lensing is the <cite>silmarel.utils.gw_lensing.lens_gw()</cite>. This tool takes in a lens model,
 a gravitational wave source position, and returns the time delays and magnifications
 needed for MM-lens reconstruction.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="silmarel.utils.gw_lensing.lens_gw">
+<span class="sig-prename descclassname"><span class="pre">silmarel.utils.gw_lensing.</span></span><span class="sig-name descname"><span class="pre">lens_gw</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pointmodel</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pointkwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">massmodel</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lenskwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z_l</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z_s</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">H0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">70</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_images</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">likelihood</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'lenstronomy'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="headerlink" href="#silmarel.utils.gw_lensing.lens_gw" title="Link to this definition">¶</a></dt>
+<dd><p>Function to simulate a lensed gravitational wave.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pointmodel</strong> (<em>Any</em>) – Herculens PointSource model for GW.</p></li>
+<li><p><strong>pointkwargs</strong> (<em>list</em>) – List-wrapped dictionary with GW ra, dec.</p></li>
+<li><p><strong>massmodel</strong> (<em>Any</em>) – Herculens MassModel/Lenstronomy LensModel object.</p></li>
+<li><p><strong>lenskwargs</strong> (<em>list</em>) – Herculens/Lenstronomy lens parameters.</p></li>
+<li><p><strong>z_l</strong> (<em>float</em>) – Lens redshift.</p></li>
+<li><p><strong>z_s</strong> (<em>float</em>) – Source redshift.</p></li>
+<li><p><strong>H0</strong> (<em>float</em><em>, </em><em>optional</em>) – Hubble constant (default is 70)</p></li>
+<li><p><strong>n_images</strong> (<em>int</em><em> or </em><em>float</em><em> or </em><em>None</em><em>, </em><em>optional</em>) – <p>Number of images to compare against.
+- If None: returns the normal GW dictionary.
+- If float: checks if length of GW parameters matches data.</p>
+<blockquote>
+<div><p>If not, returns a dummy dictionary without values.</p>
+</div></blockquote>
+</p></li>
+<li><p><strong>likelihood</strong> (<em>str</em><em>, </em><em>optional</em>) – If ‘herculens’, uses Herculens; else uses Lenstronomy.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dictionary with time delays, relative magnifications,
+image positions, source position, effective
+luminosity distance.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
 </section>
-<section id="simulation">
-<h2>Simulation<a class="headerlink" href="#simulation" title="Link to this heading">¶</a></h2>
+<section id="module-silmarel.simulation.data_sim">
+<span id="simulation"></span><h2>Simulation<a class="headerlink" href="#module-silmarel.simulation.data_sim" title="Link to this heading">¶</a></h2>
+<p>This module provides simple-to-use functions to wrap around
+lenstronomy/herculens and include lensed GW simulation for
+complete lensed MM simulations.</p>
+<p>Author: Laura E. Uronen
+Date: 03-Sept-2025</p>
 </section>
 <section id="data">
 <h2>Data<a class="headerlink" href="#data" title="Link to this heading">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="silmarel.data.em_data">
+<span class="sig-prename descclassname"><span class="pre">silmarel.data.</span></span><span class="sig-name descname"><span class="pre">em_data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#silmarel.data.em_data" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="silmarel.data.gw_data">
+<span class="sig-prename descclassname"><span class="pre">silmarel.data.</span></span><span class="sig-name descname"><span class="pre">gw_data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#silmarel.data.gw_data" title="Link to this definition">¶</a></dt>
+<dd><p>Handle GW data reading and processing.</p>
+</dd></dl>
+
 </section>
 <section id="likelihood">
 <h2>Likelihood<a class="headerlink" href="#likelihood" title="Link to this heading">¶</a></h2>
@@ -89,9 +133,16 @@ needed for MM-lens reconstruction.</p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">silmarel</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#utils">Utils</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#simulation">Simulation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#data">Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#utils">Utils</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#silmarel.utils.gw_lensing.lens_gw"><code class="docutils literal notranslate"><span class="pre">lens_gw()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-silmarel.simulation.data_sim">Simulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#data">Data</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#silmarel.data.em_data"><code class="docutils literal notranslate"><span class="pre">em_data()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#silmarel.data.gw_data"><code class="docutils literal notranslate"><span class="pre">gw_data()</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#likelihood">Likelihood</a></li>
 </ul>
 </li>
