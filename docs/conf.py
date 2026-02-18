@@ -17,7 +17,6 @@ release = '0.0.1'
 linkcode_url = "https://git.ligo.org/lauraelina.uronen/silmarel/-/blob/main/{path}#L{lineno}"
 
 extensions = [
-    "myst_parser",
     "sphinx.ext.autodoc",
     "sphinx.ext.autosummary",
     "sphinx.ext.coverage",
