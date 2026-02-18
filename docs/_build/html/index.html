@@ -6,12 +6,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Welcome to silmarel’s documentation! &#8212; silmarel 0.1 documentation</title>
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=0745d1ac" />
     <link rel="stylesheet" type="text/css" href="_static/basic.css?v=686e5160" />
     <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=27fed22d" />
+    <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/github_style.css?v=1093691d" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
     <script src="_static/documentation_options.js?v=2709fde1"></script>
     <script src="_static/doctools.js?v=9bcbadda"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Usage" href="usage.html" />
@@ -34,6 +41,18 @@
             
   <section id="welcome-to-silmarel-s-documentation">
 <h1>Welcome to silmarel’s documentation!<a class="headerlink" href="#welcome-to-silmarel-s-documentation" title="Link to this heading">¶</a></h1>
+<p><strong>silmarel</strong> is a package intended to make
+multi-messenger lensing analyses smooth and easy
+to achieve. To this end, we incorporate both
+usual EM lens reconstruction packages with the
+typical data products of lensed GW analyses.</p>
+<p>The package also contains likelihoods designed
+for multi-messenger lens reconstruction.</p>
+<p>Currently-incorporated packages include:</p>
+<ul class="simple">
+<li><p>EM: lenstronomy, herculens</p></li>
+<li><p>GW: golum-JPE</p></li>
+</ul>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>This project is under active development.</p>
@@ -46,6 +65,17 @@
 <li class="toctree-l2"><a class="reference internal" href="usage.html#installation">Installation</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="silmarel.html">silmarel</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="silmarel.html#utils">Utils</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="silmarel.html#silmarel.utils.gw_lensing.lens_gw"><code class="docutils literal notranslate"><span class="pre">silmarel.utils.gw_lensing.lens_gw()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="silmarel.html#simulation">Simulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="silmarel.html#data">Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="silmarel.html#likelihood">Likelihood</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
 </ul>
 </div>
 </section>
@@ -79,6 +109,8 @@
 <script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="silmarel.html">silmarel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
 </ul>
 
 <div class="relations">

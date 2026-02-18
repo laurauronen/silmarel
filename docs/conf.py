@@ -14,6 +14,8 @@ release = '0.1'
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
+linkcode_url = "https://git.ligo.org/lauraelina.uronen/silmarel/-/blob/main/{path}#L{lineno}"
+
 extensions = [
     "myst_parser",
     "sphinx.ext.autodoc",
@@ -32,6 +34,8 @@ extensions = [
     "sphinxarg.ext",
 ]
 
+
+master_doc = 'index'
 
 templates_path = ['_templates']
 exclude_patterns = []
