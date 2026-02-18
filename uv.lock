@@ -1689,6 +1689,15 @@ wheels = [
 ]
 
 [[package]]
+name = "pymultinest"
+version = "2.12"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/55/f2/99a108aca74a6c1d9390d328a2e94b57e76695d7b365a89b7b5027a0b710/pymultinest-2.12.tar.gz", hash = "sha256:a8ac6787fa0dd9b374a3a2e981d48a1975e935ac846a8083d209078443d3e90c", size = 883312, upload-time = "2023-07-28T22:13:36.283Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/69/25/a603aa4cf4d7653e8ff492da93302920fecdd3bb3e3b1b05bb1a1176f721/pymultinest-2.12-py2.py3-none-any.whl", hash = "sha256:c643d789364169f3a98c2f1966fdbe2eabff923747d42dc44eac7f8206052722", size = 50845, upload-time = "2023-07-28T22:13:56.249Z" },
+]
+
+[[package]]
 name = "pyparsing"
 version = "3.3.2"
 source = { registry = "https://pypi.org/simple" }
@@ -2207,6 +2216,7 @@ dependencies = [
     { name = "nifty8" },
     { name = "numpyro" },
     { name = "optax" },
+    { name = "pymultinest" },
     { name = "tqdm" },
 ]
 
@@ -2222,6 +2232,7 @@ requires-dist = [
     { name = "nifty8", specifier = ">=8.5.7" },
     { name = "numpyro", specifier = ">=0.19.0" },
     { name = "optax", specifier = ">=0.2.6" },
+    { name = "pymultinest", specifier = ">=2.12" },
     { name = "tqdm", specifier = ">=4.67.1" },
 ]
 

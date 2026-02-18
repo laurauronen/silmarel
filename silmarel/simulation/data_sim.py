@@ -130,8 +130,13 @@ class ModelSim():
         data_class.update_data(image_real)
         self.settings.kwargs_data['image_data'] = image_real
 
-        fig, ax = plt.subplots(1, 1, figsize=(10, 10))
-        lens_plot.lens_model_plot(ax, lensModel=self.models.LensMass, kwargs_lens=self.models.mass_kwargs, sourcePos_x=self.gw_data['source_ra'], sourcePos_y=self.gw_data['source_dec'], point_source=True, with_caustics=True, fast_caustic=True)
+        _ , ax = plt.subplots(1, 1, figsize=(10, 10))
+        lens_plot.lens_model_plot(ax, lensModel=self.models.LensMass, 
+                                  kwargs_lens=self.models.mass_kwargs, 
+                                  sourcePos_x=self.gw_data['source_ra'], 
+                                  sourcePos_y=self.gw_data['source_dec'], 
+                                  point_source=True, with_caustics=True, 
+                                  fast_caustic=True)
         plt.savefig(self.outdir+'/lens_plot.png')
         plt.close()
 
