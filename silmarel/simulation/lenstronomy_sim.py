@@ -25,10 +25,9 @@ from lenstronomy.Data.psf import PSF as lens_PSF
 from lenstronomy.Plots import lens_plot
 
 # local imports 
-#from ..utils.herculens_gw import *
 from ..utils.gw_lensing import *
 
-class ModelSim():
+class LenstronomySim():
     """
     Attributes:
     ===========
@@ -46,50 +45,21 @@ class ModelSim():
                  kwargs_settings : list[dict],
                  outdir : str,
                  gw_kwargs : Optional[dict] = None,
-                 H0 : float = 70, 
-                 likeli: str = 'lenstronomy'):
+                 H0 : float = 70,):
 
         self.outdir = outdir
+        os.makedirs(outdir, exist_ok=True)
 
-        if not os.path.exists(outdir):
-            os.mkdir(outdir)
+        # private setup steps
+        self._setup_models(models, kwargs_models)
+        self._setup_data(kwargs_settings)
+        if gw_kwargs:
+            self._setup_gw(gw_kwargs, H0)
 
-        lensmass, sourcelight, lenslight = models
-        kwargs_mass, kwargs_source, kwargs_light = kwargs_models
-        self.models = ModelParams(lensmass,
-                                  sourcelight,
-                                  lenslight,
-                                  kwargs_mass,
-                                  kwargs_source,
-                                  kwargs_light)
-
-        kwargs_data, kwargs_psf, kwargs_pixel, kwargs_numerics = kwargs_settings
-        self.settings = DataParams(kwargs_data, kwargs_psf, kwargs_pixel, kwargs_numerics)
-
-        self.pixelgrid = None
-        self.psf = None
-
-        if likeli == 'lenstronomy':
-            if gw_kwargs:
-                self.gw_data = lens_gw(pointmodel=None,
-                                       pointkwargs=gw_kwargs,
-                                       massmodel=lensmass,
-                                       lenskwargs=kwargs_mass,
-                                       z_l=lensmass.z_lens,
-                                       z_s=lensmass.z_source,
-                                       H0 = H0)
-
-                self.pixelgrid = lens_PixelGrid(**self.settings.kwargs_pixel)
-                self.psf = lens_PSF(**self.settings.kwargs_psf)
-
-                self.image_data = self.lenstronomy_image()
-
-        elif likeli == 'herculens':
-
-            print("WIP.")
-
-        else:
-            print('Please provide either "lenstronomy" or "herculens".')
+        self.pixelgrid = lens_PixelGrid(**self.settings.kwargs_pixel)
+        self.psf = lens_PSF(**self.settings.kwargs_psf)
+        self.image_data = self.lenstronomy_image()
+        self.caustic_plot()
 
     def lenstronomy_image(self):
         """
@@ -118,7 +88,7 @@ class ModelSim():
             background_rms = np.sqrt(np.mean((imageLens[0:10,0:10])**2))
             self.settings.kwargs_data['background_rms'] = background_rms
 
-        self.settings.kwargs_data['image_data'] = imageLens
+        self.settings.update_image(imageLens)
         data_class = lens_ImageData(**self.settings.kwargs_data)
 
         poisson = image_util.add_poisson(imageLens, 
@@ -128,22 +98,53 @@ class ModelSim():
 
         image_real = imageLens + poisson + bkg
         data_class.update_data(image_real)
-        self.settings.kwargs_data['image_data'] = image_real
+        self.settings.update_image(image_real)
+
+        return image_real
+
+    def caustic_plot(self):
+
+        if hasattr(self, 'gw_data'):
+            source_ra = self.gw_data['source_ra']
+            source_dec = self.gw_data['source_dec']
+        else:
+            source_ra, source_dec = None, None
 
         _ , ax = plt.subplots(1, 1, figsize=(10, 10))
-        lens_plot.lens_model_plot(ax, lensModel=self.models.LensMass, 
-                                  kwargs_lens=self.models.mass_kwargs, 
-                                  sourcePos_x=self.gw_data['source_ra'], 
-                                  sourcePos_y=self.gw_data['source_dec'], 
-                                  point_source=True, with_caustics=True, 
+        lens_plot.lens_model_plot(ax, lensModel=self.models.LensMass,
+                                  kwargs_lens=self.models.mass_kwargs,
+                                  sourcePos_x=source_ra,
+                                  sourcePos_y=source_dec,
+                                  point_source=True, with_caustics=True,
                                   fast_caustic=True)
         plt.savefig(self.outdir+'/lens_plot.png')
         plt.close()
 
-        return image_real
+    def _setup_models(self, models, kwargs_models):
+        lensmass, sourcelight, lenslight = models
+        mass_kwargs, source_kwargs, lenslight_kwargs = kwargs_models
+        self.models = ModelParams(lensmass,
+                                  sourcelight,
+                                  lenslight,
+                                  mass_kwargs,
+                                  source_kwargs,
+                                  lenslight_kwargs)
 
-#    def herculens_image(self):
-#        return
+    def _setup_data(self, kwargs_settings):
+        kwargs_data, kwargs_psf, kwargs_pixel, kwargs_numerics = kwargs_settings
+        self.settings = DataParams(kwargs_data, 
+                                   kwargs_psf, 
+                                   kwargs_pixel, 
+                                   kwargs_numerics)
+
+    def _setup_gw(self, gw_kwargs, H0):
+        self.gw_data = lens_gw(pointmodel=None, 
+                               pointkwargs=gw_kwargs,
+                               massmodel=self.models.LensMass,
+                               lenskwargs=self.models.mass_kwargs,
+                               z_l = self.models.LensMass.z_lens,
+                               z_s = self.models.LensMass.z_source, 
+                               H0 = H0)
 
 @dataclass
 class ModelParams:
@@ -191,3 +192,6 @@ class DataParams:
     kwargs_psf : dict
     kwargs_pixel : dict
     kwargs_numerics : dict
+
+    def update_image(self, image: np.ndarray):
+        self.kwargs_data['image_data'] = image

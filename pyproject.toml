@@ -7,7 +7,21 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "silmarel"
-version = "0.1.0"
+authors = [
+    {name="Laura Uronen", email="lauraelina.uronen@ligo.org"},
+    {name="Justin Janquart", email="justin.janquart@ligo.org"},
+    {name="Otto Hannuksela", email="otto.hannuksela@ligo.org},
+    {name="Mick Wright", email="mick.wright@ligo.org"},
+]
+
+maintainers = [
+    {name="Laura Uronen", email="lauraelina.uronen@ligo.org"},
+    {name="Justin Janquart", email="justin.janquart@ligo.org"},
+    {name="Otto Hannuksela", email="otto.hannuksela@ligo.org},
+    {name="Mick Wright", email="mick.wright@ligo.org"},
+]
+
+version = "0.0.1"
 description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.10"

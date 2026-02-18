@@ -17,15 +17,13 @@ import logging
 silmarel_logger =  logging.getLogger("silmarel")
 silmarel_logger.setLevel(logging.INFO)
 
-jax = False
-
-try: 
+try:
     from herculens.MassModel.mass_model import MassModel
     from herculens.PointSourceModel.point_source import PointSource
-    jax = True
+    HAS_HERCULENS = True
 except ImportError or ModuleNotFoundError:
     silmarel_logger.warning("Herculens not found. JAX functionality will be disabled.")
-    jax = False
+    HAS_HERCULENS = False
 
 def tdd (z_l: float,
          z_s: float,
@@ -106,8 +104,8 @@ def lens_gw(pointmodel: Optional[Any],
 
     if likelihood == 'herculens':
         # make sure that if herculens is not imported, it raises an error
-        if jax is False:
-            raise ImportError("Herculens is not installed. Cannot use 'herculens' likelihood.")
+        if not HAS_HERCULENS:
+            raise ImportError("Herculens not installed. Cannot use 'herculens' likelihood.")
 
         # solve image positions
         theta_ra, theta_dec = \
@@ -170,20 +168,12 @@ def lens_gw(pointmodel: Optional[Any],
 
         # if no match, set dummy values
         else:
-            if likelihood == 'herculens':
-                gw_dictionary = {'image_ra': - jnp.ones(n_images) * jnp.inf,
-                                'image_dec': - jnp.ones(n_images)* jnp.inf, 
-                                'delta_t' : - jnp.ones(n_images - 1) * jnp.inf, 
-                                'relative_magnification' : \
-                                    - jnp.ones(n_images - 1) * jnp.inf
-                                }
-            elif likelihood == 'lenstronomy':
-                gw_dictionary = {'image_ra': - np.ones(n_images) * np.inf,
-                                'image_dec': - np.ones(n_images)* np.inf, 
-                                'delta_t' : - np.ones(n_images - 1) * np.inf, 
-                                'relative_magnification' : \
-                                    - np.ones(n_images - 1) * np.inf
-                                }
+            gw_dictionary = {
+                'image_ra': dummy_array(n_images, likelihood),
+                'image_dec': dummy_array(n_images, likelihood),
+                'delta_t': dummy_array(n_images-1, likelihood),
+                'relative_magnification': dummy_array(n_images-1, likelihood)
+                }
 
     # if no image number just return lensed dict
     else:
@@ -201,3 +191,10 @@ def lens_gw(pointmodel: Optional[Any],
     gw_dictionary['z_source'] = z_s
 
     return gw_dictionary
+
+def dummy_array(shape, likelihood):
+    """Return an array of -inf using jax.numpy or numpy depending on likelihood."""
+    if likelihood == 'herculens':
+        return -jnp.inf * jnp.ones(shape)
+    else:
+        return -np.inf * np.ones(shape)

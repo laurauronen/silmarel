@@ -14,6 +14,7 @@
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Contributing" href="../contributing.html" />
     <link rel="prev" title="silmarel.utils.funcs module" href="silmarel.utils.funcs.html" />
    
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
@@ -35,6 +36,12 @@
   <section id="module-silmarel.utils.gw_lensing">
 <span id="silmarel-utils-gw-lensing-module"></span><h1>silmarel.utils.gw_lensing module<a class="headerlink" href="#module-silmarel.utils.gw_lensing" title="Link to this heading">¶</a></h1>
 <p>Tools to lens gravitational wave using Lenstronomy setup/models.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="silmarel.utils.gw_lensing.dummy_array">
+<span class="sig-prename descclassname"><span class="pre">silmarel.utils.gw_lensing.</span></span><span class="sig-name descname"><span class="pre">dummy_array</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">shape</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">likelihood</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#silmarel.utils.gw_lensing.dummy_array" title="Link to this definition">¶</a></dt>
+<dd><p>Return an array of -inf using jax.numpy or numpy depending on likelihood.</p>
+</dd></dl>
+
 <dl class="py function">
 <dt class="sig sig-object py" id="silmarel.utils.gw_lensing.lens_gw">
 <span class="sig-prename descclassname"><span class="pre">silmarel.utils.gw_lensing.</span></span><span class="sig-name descname"><span class="pre">lens_gw</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pointmodel</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pointkwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">massmodel</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lenskwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z_l</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z_s</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">H0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">70</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_images</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">likelihood</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'lenstronomy'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="headerlink" href="#silmarel.utils.gw_lensing.lens_gw" title="Link to this definition">¶</a></dt>
@@ -121,8 +128,6 @@ luminosity distance.</p>
 <script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../usage.html">Usage</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../silmarel.html">silmarel</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributing</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="silmarel.html">silmarel package</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="silmarel.html#subpackages">Subpackages</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="silmarel.data.html">silmarel.data package</a></li>
@@ -132,6 +137,7 @@ luminosity distance.</p>
 <li class="toctree-l4 current"><a class="reference internal" href="silmarel.utils.html#submodules">Submodules</a><ul class="current">
 <li class="toctree-l5"><a class="reference internal" href="silmarel.utils.funcs.html">silmarel.utils.funcs module</a></li>
 <li class="toctree-l5 current"><a class="current reference internal" href="#">silmarel.utils.gw_lensing module</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="#silmarel.utils.gw_lensing.dummy_array"><code class="docutils literal notranslate"><span class="pre">dummy_array()</span></code></a></li>
 <li class="toctree-l6"><a class="reference internal" href="#silmarel.utils.gw_lensing.lens_gw"><code class="docutils literal notranslate"><span class="pre">lens_gw()</span></code></a></li>
 <li class="toctree-l6"><a class="reference internal" href="#silmarel.utils.gw_lensing.tdd"><code class="docutils literal notranslate"><span class="pre">tdd()</span></code></a></li>
 </ul>
@@ -144,6 +150,7 @@ luminosity distance.</p>
 </li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributing</a></li>
 </ul>
 
 <div class="relations">
@@ -153,6 +160,7 @@ luminosity distance.</p>
   <li><a href="silmarel.html">silmarel package</a><ul>
   <li><a href="silmarel.utils.html">silmarel.utils package</a><ul>
       <li>Previous: <a href="silmarel.utils.funcs.html" title="previous chapter">silmarel.utils.funcs module</a></li>
+      <li>Next: <a href="../contributing.html" title="next chapter">Contributing</a></li>
   </ul></li>
   </ul></li>
   </ul></li>
