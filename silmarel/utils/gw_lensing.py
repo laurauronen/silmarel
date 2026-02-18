@@ -30,23 +30,22 @@ except ImportError or ModuleNotFoundError:
 def tdd (z_l: float,
          z_s: float,
          cosmo: Any) -> Any:
-    """
-    Obtain time delay distance constant for given parameters. 
+  """
+    Obtain time delay distance constant for given parameters.
 
-    ARGS
-    ====
-    z_lens (float):
+    Parameters
+    ----------
+    z_lens : float
         Lens redshift
-    z_source (float):
+    z_source : float
         Source redshift
-    H0 (float):
+    H0 : float
         Hubble constant for chosen cosmology
 
-    RETURNS
-    =======
-    (float):        
+    Returns
+    -------
+    float
         Time delay distance value.
-
     """
 
     DL = cosmo.angular_diameter_distance(z=z_l).to(u.m)
@@ -65,41 +64,39 @@ def lens_gw(pointmodel: Optional[Any],
             H0 : float = 70,
             n_images : Optional[float] = None,
             likelihood : str = 'lenstronomy') -> dict:
-
     """
     Function to simulate a lensed gravitational wave.
 
-    ARGS
-    ====
-    pointmodel (Any):
+    Parameters
+    ----------
+    pointmodel : Any
         Herculens PointSource model for GW.
-    pointkwargs (list):
+    pointkwargs : list
         List-wrapped dictionary with GW ra, dec.
-    massmodel (Any):
+    massmodel : Any
         Herculens MassModel/Lenstronomy LensModel object.
-    lenskwargs (list):
+    lenskwargs : list
         Herculens/Lenstronomy lens parameters.
-    z_l (float):
+    z_l : float
         Lens redshift.
-    z_s (float):
+    z_s : float
         Source redshift.
-    H0  (float):
-        Hubble constant. Default H0 = 70
-    n_images (int):
+    H0 : float, optional
+        Hubble constant (default is 70)
+    n_images : int or float or None, optional
         Number of images to compare against.
-        If None:    will return the normal GW dictionary.
-        If float:   will check if length of GW parameters 
-                    matches given data.
-                    If not, returns a dummy dictionary without values.
-    likelihood (str):
-        If 'herculens', uses Herculens, else uses Lenstronomy.
+        - If None: returns the normal GW dictionary.
+        - If float: checks if length of GW parameters matches data.
+          If not, returns a dummy dictionary without values.
+    likelihood : str, optional
+        If 'herculens', uses Herculens; else uses Lenstronomy.
 
-    RETURNS
-    =======
-    gw_dictionary (dict):
+    Returns
+    -------
+    dict
         Dictionary with time delays, relative magnifications,
         image positions, source position, effective 
-        luminosity distance. 
+        luminosity distance.
     """
 
     cosmo = FlatLambdaCDM(H0=H0, Om0=0.3)
