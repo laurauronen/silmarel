@@ -97,7 +97,7 @@ def lens_gw(pointmodel: Optional[Any],
         image positions, source position, effective 
         luminosity distance.
     """
-    
+
     cosmo = FlatLambdaCDM(H0=H0, Om0=0.3)
     luminosity_distance = cosmo.luminosity_distance(z_s)
 
