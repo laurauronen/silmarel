@@ -1,3 +1,10 @@
+
+[build-system]
+requires = ["setuptools", "setuptools-scm"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools_scm]
+
 [project]
 name = "silmarel"
 version = "0.1.0"
@@ -29,3 +36,7 @@ docs = [
   "sphinx-design",
   "sphinx-github-style",
 ]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["silmarel*"]
