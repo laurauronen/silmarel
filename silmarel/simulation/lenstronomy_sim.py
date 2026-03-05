@@ -45,7 +45,8 @@ class LenstronomySim():
                  kwargs_settings : list[dict],
                  outdir : str,
                  gw_kwargs : Optional[dict] = None,
-                 H0 : float = 70,):
+                 H0 : float = 70,
+                 noise : bool = True):
 
         self.outdir = outdir
         os.makedirs(outdir, exist_ok=True)
@@ -53,6 +54,7 @@ class LenstronomySim():
         # private setup steps
         self._setup_models(models, kwargs_models)
         self._setup_data(kwargs_settings)
+        self.noise = noise
         if gw_kwargs:
             self._setup_gw(gw_kwargs, H0)
 
@@ -96,9 +98,17 @@ class LenstronomySim():
         bkg = image_util.add_background(imageLens, 
                                         sigma_bkd=self.settings.kwargs_data['background_rms'])
 
-        image_real = imageLens + poisson + bkg
+        if self.noise:
+            image_real = imageLens + poisson + bkg
+        else:
+            image_real = imageLens
         data_class.update_data(image_real)
         self.settings.update_image(image_real)
+
+        _, ax = plt.subplots(1, 1, figsize=(10, 10))
+        ax.imshow(np.log10(image_real), origin='lower', cmap='magma')
+        plt.savefig(self.outdir+'/image_observed.png')
+        plt.close()
 
         return image_real
 
@@ -107,18 +117,18 @@ class LenstronomySim():
         if hasattr(self, 'gw_data'):
             source_ra = self.gw_data['source_ra']
             source_dec = self.gw_data['source_dec']
-        else:
-            source_ra, source_dec = None, None
 
-        _ , ax = plt.subplots(1, 1, figsize=(10, 10))
-        lens_plot.lens_model_plot(ax, lensModel=self.models.LensMass,
-                                  kwargs_lens=self.models.mass_kwargs,
-                                  sourcePos_x=source_ra,
-                                  sourcePos_y=source_dec,
-                                  point_source=True, with_caustics=True,
-                                  fast_caustic=True)
-        plt.savefig(self.outdir+'/lens_plot.png')
-        plt.close()
+            _ , ax = plt.subplots(1, 1, figsize=(10, 10))
+            lens_plot.lens_model_plot(ax, lensModel=self.models.LensMass,
+                                    kwargs_lens=self.models.mass_kwargs,
+                                    sourcePos_x=source_ra,
+                                    sourcePos_y=source_dec,
+                                    point_source=True, with_caustics=True,
+                                    fast_caustic=True)
+            plt.savefig(self.outdir+'/lens_plot.png')
+            plt.close()
+        else:
+            print("No GW data provided, skipping caustic plot.")
 
     def _setup_models(self, models, kwargs_models):
         lensmass, sourcelight, lenslight = models
