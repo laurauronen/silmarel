@@ -71,7 +71,8 @@ class LenstronomyLikeli():
                 z_l : float, 
                 z_s : Optional[float],
                 H0 : float = 70,
-                outdir : str = 'outdir_silmarel'):
+                outdir : str = 'outdir_silmarel',
+                overwrite : bool = True):
 
         self.em_data = em_data
         self.gw_data = gw_data
@@ -93,10 +94,14 @@ class LenstronomyLikeli():
         self.H0 = H0
 
         self.outdir = outdir
-        if os.path.exists(outdir):
-            print('WARNING: Overwriting outdir.')
+        if os.path.exists(outdir) and overwrite:
+            silmarel_logger.warning('Outdir already exists. Removing and creating new outdir.')
             shutil.rmtree(outdir)
-        os.makedirs(outdir)
+            os.makedirs(outdir)
+        elif not os.path.exists(outdir):
+            os.makedirs(outdir)
+        elif os.path.exists(outdir) and not overwrite:
+            silmarel_logger.warning('Outdir already exists. Files may be overwritten.')
 
         if isinstance(em_data, ImageData):
             # set lens reconstruction inference settings
